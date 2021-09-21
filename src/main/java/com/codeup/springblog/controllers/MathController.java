@@ -18,4 +18,10 @@ public class MathController {
     public int subtract(@PathVariable int operandOne, @PathVariable int operandTwo) {
         return operandTwo - operandOne;
     }
+
+    @GetMapping("/multiply/{factorOne}/and/{factorTwo}")
+    @ResponseBody
+    public int multiply(@PathVariable int factorOne, @PathVariable int factorTwo) {
+        return factorOne * factorTwo;
+    }
 }
