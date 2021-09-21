@@ -24,4 +24,10 @@ public class MathController {
     public int multiply(@PathVariable int factorOne, @PathVariable int factorTwo) {
         return factorOne * factorTwo;
     }
+
+    @GetMapping("/divide/{dividend}/by/{divisor}")
+    @ResponseBody
+    public int divide(@PathVariable int dividend, @PathVariable int divisor) {
+        return dividend / divisor;
+    }
 }
