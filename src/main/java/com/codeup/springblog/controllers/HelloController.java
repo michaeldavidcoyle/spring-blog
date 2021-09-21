@@ -1,10 +1,12 @@
 package com.codeup.springblog.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.rmi.MarshalledObject;
 import java.util.Random;
 
 @Controller
@@ -37,5 +39,11 @@ public class HelloController {
         int low = 1;
         int high = 100;
         return r.nextInt(high - low + 1) + low;
+    }
+
+    @GetMapping("/weather")
+    public String viewWeather(Model model) {
+        model.addAttribute("temp", "93F");
+        return "weather";
     }
 }
