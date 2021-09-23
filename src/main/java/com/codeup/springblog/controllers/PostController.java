@@ -1,23 +1,38 @@
 package com.codeup.springblog.controllers;
 
+import com.codeup.springblog.models.Post;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 public class PostController {
     @GetMapping("/posts")
-    @ResponseBody
-    public String getPosts() {
-        return "posts index page";
+    public String getPosts(Model model) {
+        List<Post> allPosts = new ArrayList<>();
+
+        allPosts.add(new Post("First Post!", "Today I leared about passing data to views with Thymeleaf."));
+        allPosts.add(new Post("Second Post!", "Had some internet issues today, frustrating."));
+
+        model.addAttribute("posts", allPosts);
+
+        return "posts/index";
     }
 
     @GetMapping("/posts/{id}")
-    @ResponseBody
-    public String viewPost(@PathVariable long id) {
-        return "this is post " + id;
+    public String viewPost(@PathVariable long id, Model model) {
+        Post post = new Post("September 23, 2021", "Three-day weekend coming up, woo-woo!");
+
+        model.addAttribute("postID", id);
+        model.addAttribute("post", post);
+
+        return "posts/show";
     }
 
     @GetMapping("/posts/create")
