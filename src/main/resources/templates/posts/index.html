@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/head :: head('Spring Blog | Posts')">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<nav th:replace="partials/navbar :: navbar"></nav>
+<h1>Posts</h1>
+<div th:each="post : ${posts}">
+    <div>
+        <h2 th:text="${post.title}">Title</h2>
+        <p th:text="${post.body}">Body</p>
+    </div>
+</div>
+</body>
+</html>
