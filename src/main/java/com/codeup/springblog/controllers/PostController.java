@@ -21,11 +21,8 @@ public class PostController {
     }
 
     @GetMapping("/posts")
-    public String getPosts(Model model) {
-        List<Post> allPosts = new ArrayList<>();
-
-        allPosts.add(new Post("First Post!", "Today I learned about passing data to views with Thymeleaf."));
-        allPosts.add(new Post("Second Post!", "Had some internet issues today, frustrating."));
+    public String showPosts(Model model) {
+        List<Post> allPosts = postDao.findAll();
 
         model.addAttribute("posts", allPosts);
 
