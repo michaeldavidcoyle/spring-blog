@@ -24,7 +24,7 @@ public class PostController {
     public String getPosts(Model model) {
         List<Post> allPosts = new ArrayList<>();
 
-        allPosts.add(new Post("First Post!", "Today I leared about passing data to views with Thymeleaf."));
+        allPosts.add(new Post("First Post!", "Today I learned about passing data to views with Thymeleaf."));
         allPosts.add(new Post("Second Post!", "Had some internet issues today, frustrating."));
 
         model.addAttribute("posts", allPosts);
