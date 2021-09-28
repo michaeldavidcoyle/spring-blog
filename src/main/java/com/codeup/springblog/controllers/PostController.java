@@ -62,7 +62,11 @@ public class PostController {
             @RequestParam(name = "title") String title,
             @RequestParam(name = "body") String body
     ) {
-        postDao.save(new Post(id, title, body));
+        Post postToUpdate = postDao.getById(id);
+        postToUpdate.setTitle(title);
+        postToUpdate.setBody(body);
+
+        postDao.save(postToUpdate);
 
         return "redirect:/posts";
     }
