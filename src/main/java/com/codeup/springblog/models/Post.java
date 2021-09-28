@@ -27,9 +27,10 @@ public class Post {
         this.body = body;
     }
 
-    public Post(String title, String body) {
+    public Post(String title, String body, User owner) {
         this.title = title;
         this.body = body;
+        this.owner = owner;
     }
 
     public long getId() {

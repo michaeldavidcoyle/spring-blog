@@ -1,6 +1,7 @@
 package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.models.Post;
+import com.codeup.springblog.models.User;
 import com.codeup.springblog.repos.PostRepository;
 import com.codeup.springblog.repos.UserRepository;
 import org.springframework.stereotype.Controller;
@@ -39,15 +40,20 @@ public class PostController {
     }
 
     @GetMapping("/posts/create")
-    @ResponseBody
     public String viewPostForm() {
-        return "view create post form";
+        return "/posts/create";
     }
 
     @PostMapping("posts/create")
-    @ResponseBody
-    public String createPost() {
-        return "create a new post";
+    public String createPost(
+            @RequestParam(name = "title") String title,
+            @RequestParam(name = "body") String body
+    ) {
+        User owner = userDao.getById(1L);
+
+        postDao.save(new Post(title, body, owner));
+
+        return "redirect:/posts";
     }
 
     @GetMapping("/posts/edit/{id}")
