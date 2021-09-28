@@ -4,12 +4,8 @@ import com.codeup.springblog.models.Post;
 import com.codeup.springblog.repos.PostRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -31,7 +27,7 @@ public class PostController {
 
     @GetMapping("/posts/{id}")
     public String viewPost(@PathVariable long id, Model model) {
-        Post post = new Post("September 23, 2021", "Three-day weekend coming up, woo-woo!");
+        Post post = postDao.getById(id);
 
         model.addAttribute("postID", id);
         model.addAttribute("post", post);
@@ -49,5 +45,22 @@ public class PostController {
     @ResponseBody
     public String createPost() {
         return "create a new post";
+    }
+
+    @GetMapping("/posts/edit/{id}")
+    public String viewEditForm(@PathVariable long id, Model model) {
+        model.addAttribute("id", postDao.getById(id).getId());
+        return "/posts/edit";
+    }
+
+    @PostMapping("/posts/edit/{id}")
+    public String editPost(
+            @PathVariable long id,
+            @RequestParam(name = "title") String title,
+            @RequestParam(name = "body") String body
+    ) {
+        postDao.save(new Post(id, title, body));
+
+        return "redirect:/posts";
     }
 }
