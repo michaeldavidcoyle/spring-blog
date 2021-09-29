@@ -1,7 +1,6 @@
 package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.models.Post;
-import com.codeup.springblog.models.User;
 import com.codeup.springblog.repos.PostRepository;
 import com.codeup.springblog.repos.UserRepository;
 import org.springframework.stereotype.Controller;
@@ -56,16 +55,14 @@ public class PostController {
 
     @GetMapping("/posts/{id}/edit")
     public String viewEditForm(@PathVariable long id, Model model) {
-        model.addAttribute("blogPost", postDao.getById(id));
+        model.addAttribute("postToUpdate", postDao.getById(id));
         return "/posts/edit";
     }
 
     @PostMapping("/posts/{id}/edit")
-    public String editPost(@PathVariable long id, @ModelAttribute Post blogPost) {
-        Post postToUpdate = postDao.getById(id);
-
-        postToUpdate.setTitle(blogPost.getTitle());
-        postToUpdate.setBody(blogPost.getBody());
+    public String editPost(@PathVariable long id, @ModelAttribute Post postToUpdate) {
+        postToUpdate.setId(id);
+        postToUpdate.setOwner(userDao.getById(1L));
 
         postDao.save(postToUpdate);
 
