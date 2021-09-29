@@ -55,7 +55,7 @@ public class PostController {
 
         emailService.prepareAndSend(
                 postToAdd,
-                "New Post Created"
+                "New Post Created",
                 "You created a new post: " + postToAdd.getTitle()
         );
 
