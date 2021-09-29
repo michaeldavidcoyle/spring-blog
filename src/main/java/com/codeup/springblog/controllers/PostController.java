@@ -53,6 +53,12 @@ public class PostController {
 
         postDao.save(postToAdd);
 
+        emailService.prepareAndSend(
+                postToAdd,
+                "New Post Created"
+                "You created a new post: " + postToAdd.getTitle()
+        );
+
         return "redirect:/posts";
     }
 
