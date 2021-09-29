@@ -1,7 +1,6 @@
 package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.models.Post;
-import com.codeup.springblog.models.User;
 import com.codeup.springblog.repos.PostRepository;
 import com.codeup.springblog.repos.UserRepository;
 import org.springframework.stereotype.Controller;
@@ -40,37 +39,30 @@ public class PostController {
     }
 
     @GetMapping("/posts/create")
-    public String viewPostForm() {
+    public String viewPostForm(Model model) {
+        model.addAttribute("post", new Post());
         return "/posts/create";
     }
 
     @PostMapping("posts/create")
-    public String createPost(
-            @RequestParam(name = "title") String title,
-            @RequestParam(name = "body") String body
-    ) {
-        User owner = userDao.getById(1L);
+    public String createPost(@ModelAttribute Post postToAdd) {
+        postToAdd.setOwner(userDao.getById(1L));
 
-        postDao.save(new Post(title, body, owner));
+        postDao.save(postToAdd);
 
         return "redirect:/posts";
     }
 
-    @GetMapping("/posts/edit/{id}")
+    @GetMapping("/posts/{id}/edit")
     public String viewEditForm(@PathVariable long id, Model model) {
-        model.addAttribute("id", postDao.getById(id).getId());
+        model.addAttribute("postToUpdate", postDao.getById(id));
         return "/posts/edit";
     }
 
-    @PostMapping("/posts/edit/{id}")
-    public String editPost(
-            @PathVariable long id,
-            @RequestParam(name = "title") String title,
-            @RequestParam(name = "body") String body
-    ) {
-        Post postToUpdate = postDao.getById(id);
-        postToUpdate.setTitle(title);
-        postToUpdate.setBody(body);
+    @PostMapping("/posts/{id}/edit")
+    public String editPost(@PathVariable long id, @ModelAttribute Post postToUpdate) {
+        postToUpdate.setId(id);
+        postToUpdate.setOwner(userDao.getById(1L));
 
         postDao.save(postToUpdate);
 
