@@ -13,6 +13,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="/posts/create">Create Post</a>
             </li>
+            <li>
+                <form th:action="@{/logout}" th:method="post">
+                    <button class="btn-link btn" type="submit">Logout</button>
+                </form>
+            </li>
 <!--            <li class="nav-item dropdown">-->
 <!--                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
 <!--                    Dropdown-->
