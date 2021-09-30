@@ -5,7 +5,8 @@
     <title>Title</title>
 </head>
 <body>
-    <nav th:replace="partials/navbar :: navbar"></nav>
+<nav th:replace="partials/navbar :: navbar"></nav>
+<div class="container">
     <h1>Post ID: <span th:text="${postID}">ID</span></h1>
     <div>
         <h2 th:text="${post.title}">Title</h2>
@@ -16,7 +17,8 @@
             <input type="submit" value="Delete">
         </form>
     </div>
+</div>
 
-    <div th:include="partials/scripts :: scripts"></div>
+<div th:include="partials/scripts :: scripts"></div>
 </body>
 </html>

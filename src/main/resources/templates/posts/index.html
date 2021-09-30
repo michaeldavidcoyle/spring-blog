@@ -5,7 +5,8 @@
     <title>Title</title>
 </head>
 <body>
-    <nav th:replace="partials/navbar :: navbar"></nav>
+<nav th:replace="partials/navbar :: navbar"></nav>
+<div class="container">
     <h1>Posts</h1>
     <div th:each="post : ${posts}">
         <div>
@@ -13,6 +14,7 @@
             <p th:text="${post.body}">Body</p>
         </div>
     </div>
-    <div th:include="partials/scripts :: scripts"></div>
+</div>
+<div th:include="partials/scripts :: scripts"></div>
 </body>
 </html>

@@ -5,7 +5,8 @@
     <title>Edit Post</title>
 </head>
 <body>
-    <nav th:replace="partials/navbar :: navbar"></nav>
+<nav th:replace="partials/navbar :: navbar"></nav>
+<div class="container">
     <form th:action="@{|/posts/${id}/edit|}" th:method="POST" th:object="${postToUpdate}">
         <label for="title">Title</label>
         <input type="text" th:field="*{title}" id="title">
@@ -15,7 +16,8 @@
 
         <button type="submit">Update Post</button>
     </form>
+</div>
 
-    <div th:include="partials/scripts :: scripts"></div>
+<div th:include="partials/scripts :: scripts"></div>
 </body>
 </html>
