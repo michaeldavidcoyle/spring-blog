@@ -51,8 +51,8 @@ public class PostController {
 
     @PostMapping("posts/create")
     public String createPost(@ModelAttribute Post postToAdd) {
-        User owner = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        postToAdd.setOwner(owner);
+        User authenticatedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        postToAdd.setOwner(authenticatedUser);
 
         postDao.save(postToAdd);
 
@@ -73,10 +73,10 @@ public class PostController {
 
     @PostMapping("/posts/{id}/edit")
     public String editPost(@PathVariable long id, @ModelAttribute Post postToUpdate) {
-        User owner = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User authenticatedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         postToUpdate.setId(id);
-        postToUpdate.setOwner(owner);
+        postToUpdate.setOwner(authenticatedUser);
 
         postDao.save(postToUpdate);
 
