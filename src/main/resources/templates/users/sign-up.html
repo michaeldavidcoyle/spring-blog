@@ -6,18 +6,26 @@
 </head>
 <body>
 <nav th:replace="partials/navbar :: navbar"></nav>
-<h1>Create an account</h1>
-<form th:action="@{/sign-up}" th:method="POST" th:object="${user}">
-    <label for="username">Username</label>
-    <input id="username" th:field="*{username}" />
+<div class="container">
+    <h1>Create an account</h1>
+    <form th:action="@{/sign-up}" th:method="POST" th:object="${user}">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input class="form-control" id="username" th:field="*{username}"/>
+        </div>
 
-    <label for="email">Email</label>
-    <input id="email" th:field="*{email}" />
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input class="form-control" id="email" th:field="*{email}"/>
+        </div>
 
-    <label for="password">Password</label>
-    <input id="password" type="password" th:field="*{password}" />
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input class="form-control" id="password" type="password" th:field="*{password}"/>
+        </div>
 
-    <input value="Sign me up!" type="submit" />
-</form>
+        <input class="btn btn-primary" value="Sign me up!" type="submit"/>
+    </form>
+</div>
 </body>
 </html>
