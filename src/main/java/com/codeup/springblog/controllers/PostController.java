@@ -73,10 +73,7 @@ public class PostController {
 
     @PostMapping("/posts/{id}/edit")
     public String editPost(@PathVariable long id, @ModelAttribute Post postToUpdate) {
-        User authenticatedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
         postToUpdate.setId(id);
-        postToUpdate.setOwner(authenticatedUser);
 
         postDao.save(postToUpdate);
 
